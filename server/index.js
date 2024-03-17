@@ -3,12 +3,12 @@ const express = require("express");
 const { MongoClient, ObjectId } = require("mongodb");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const dotenv = require("dotenv").config();
 
 // Constants and variables
 const app = express();
-const connectionString =
-  "mongodb+srv://swapnil:swapnil321@cluster0.jutckhu.mongodb.net/";
-const PORT = 8083;
+const mongodbUri = process.env.MONGO_URI;
+const PORT = process.env.PORT || 8083;
 let dbClient;
 
 // Middleware
@@ -18,21 +18,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Connection to MongoDB
-MongoClient.connect(
-  connectionString,
-  { useNewUrlParser: true },
-  (error, client) => {
-    if (error) {
-      return console.log("Connection failed for some reason:", error);
-    }
-    console.log("Connection established successfully");
-    dbClient = client.db("crud"); // Get reference to the 'crud' database
-    createCollection();
-    app.listen(PORT, () => {
-      console.log("Server is running on Port: " + PORT);
-    });
+console.log("MongoDB URI:", mongodbUri);
+
+MongoClient.connect(mongodbUri, { useNewUrlParser: true }, (error, client) => {
+  if (error) {
+    return console.log("Connection failed for some reason:", error);
   }
-);
+  console.log("Connection established successfully");
+  dbClient = client.db("crud"); // Get reference to the 'crud' database
+  createCollection();
+  app.listen(PORT, () => {
+    console.log("Server is running on Port: " + PORT);
+  });
+});
 
 // Create 'todos' collection if it doesn't exist
 function createCollection() {
