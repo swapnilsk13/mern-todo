@@ -2,31 +2,34 @@ import axios from "axios";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-const Todo = props => (
-	<tr>
-		<td className={props.todo.todo_complete ? "completed" : ""}>
-			{props.todo.todo_description}
-		</td>
-		<td className={props.todo.todo_complete ? "completed" : ""}>
-			{props.todo.todo_responsible}
-		</td>
-		<td className={props.todo.todo_complete ? "completed" : ""}>
-			{props.todo.todo_priority}
-		</td>
-		<td>
-			<Link to={"/edit/" + props.todo._id}>Edit</Link>
-			<Link
-				style={{ marginLeft: "10px" }}
-				to='/'
-				onClick={() =>
-					axios
-						.delete(`http://localhost:8083/delete/${props.todo._id}`)
-						.then(() => window.location.reload())
-				}>
-				Delete
-			</Link>
-		</td>
-	</tr>
+const Todo = (props) => (
+  <tr>
+    <td className={props.todo.todo_complete ? "completed" : ""}>
+      {props.todo.todo_description}
+    </td>
+    <td className={props.todo.todo_complete ? "completed" : ""}>
+      {props.todo.todo_responsible}
+    </td>
+    <td className={props.todo.todo_complete ? "completed" : ""}>
+      {props.todo.todo_priority}
+    </td>
+    <td>
+      <Link to={"/edit/" + props.todo._id}>Edit</Link>
+      <Link
+        style={{ marginLeft: "10px" }}
+        to="/"
+        onClick={() =>
+          axios
+            .delete(
+              `https://mern-todo-server-phi.vercel.app/delete/${props.todo._id}`
+            )
+            .then(() => window.location.reload())
+        }
+      >
+        Delete
+      </Link>
+    </td>
+  </tr>
 );
 
 export default class TodosList extends Component {
@@ -37,24 +40,25 @@ export default class TodosList extends Component {
 
 	componentDidMount() {
 		// localhost:8083
-		axios.get("http://localhost:8083/")
-			.then(response => {
-				this.setState({ todos: response.data });
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
+		axios
+      .get("https://mern-todo-server-phi.vercel.app/")
+      .then((response) => {
+        this.setState({ todos: response.data });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 	}
 
 	componentDidUpdate() {
 		axios
-			.get("http://localhost:8083/")
-			.then(response => {
-				this.setState({ todos: response.data });
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
+      .get("https://mern-todo-server-phi.vercel.app/")
+      .then((response) => {
+        this.setState({ todos: response.data });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 	}
 
 	todoList() {

@@ -8,7 +8,8 @@ const bodyParser = require("body-parser");
 
 // constand and variable
 const app = express();
-const connectionString = 'mongodb://0.0.0.0:27017/';
+const connectionString =
+  "mongodb+srv://swapnil:swapnil321@cluster0.jutckhu.mongodb.net/";
 const PORT = 8083;
 let dbClient; // db connection save
 

@@ -30,21 +30,20 @@ class EditTodo extends Component {
 	componentDidMount() {
 		console.log(this.props);
 		axios
-			.get("http://localhost:8083/" + this.props.params.id)
-			.then(response => {
-			console.log("response", response);
+      .get("https://mern-todo-server-phi.vercel.app/" + this.props.params.id)
+      .then((response) => {
+        console.log("response", response);
 
-				this.setState({
-					todo_description: response.data[0].todo_description,
-					todo_responsible: response.data[0].todo_responsible,
-					todo_priority: response.data[0].todo_priority,
-					todo_complete: response.data[0].todo_complete,
-				});
-			})
-			.catch(function (error) {
-				console.log(error);
-				
-			});
+        this.setState({
+          todo_description: response.data[0].todo_description,
+          todo_responsible: response.data[0].todo_responsible,
+          todo_priority: response.data[0].todo_priority,
+          todo_complete: response.data[0].todo_complete,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 	}
 
 	onChangeTodoDescription(e) {
@@ -81,8 +80,12 @@ class EditTodo extends Component {
 		};
 		console.log(obj);
 		axios
-			.put("http://localhost:8083/update/" + this.props.params.id, obj)
-			.then(res => console.log(res.data));
+      .put(
+        "https://mern-todo-server-phi.vercel.app/update/" +
+          this.props.params.id,
+        obj
+      )
+      .then((res) => console.log(res.data));
 
 		this.props.navigate("/");
 	}
