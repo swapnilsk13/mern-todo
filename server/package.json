@@ -1,9 +1,10 @@
 {
   "name": "todo-backend",
   "version": "1.0.0",
-  "description": "todo backend usind node mongo and express",
+  "description": "Todo backend using Node.js, MongoDB, and Express.js",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
