@@ -21,10 +21,9 @@ const Todo = (props) => (
         onClick={() =>
           axios
             .delete(
-              `${process.env.API_URI}/delete/${props.todo._id}`
+              `https://todo-server-chi-three.vercel.app/delete/${props.todo._id}`
             )
             .then(() => window.location.reload())
-            .catch((error) => console.error("Delete error:", error))
         }
       >
         Delete
@@ -40,21 +39,26 @@ export default class TodosList extends Component {
   }
 
   componentDidMount() {
+    // localhost:8083
     axios
-      .get(process.env.API_URI)
+      .get("https://todo-server-chi-three.vercel.app/")
       .then((response) => {
         this.setState({ todos: response.data });
       })
-      .catch((error) => console.error("Fetch error:", error));
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   componentDidUpdate() {
     axios
-      .get(process.env.API_URI)
+      .get("https://todo-server-chi-three.vercel.app/")
       .then((response) => {
         this.setState({ todos: response.data });
       })
-      .catch((error) => console.error("Fetch error:", error));
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   todoList() {
