@@ -52,7 +52,7 @@ export default class CreateTodo extends Component {
 		};
 
 		axios
-      .post("https://mern-todo-server-phi.vercel.app/addTodo", newTodo)
+      .post(process.env.API_URI, newTodo)
       .then((res) => console.log(res.data));
 
 		this.setState({

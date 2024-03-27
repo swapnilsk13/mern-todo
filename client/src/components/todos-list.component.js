@@ -21,7 +21,7 @@ const Todo = (props) => (
         onClick={() =>
           axios
             .delete(
-              `https://mern-todo-server-phi.vercel.app/delete/${props.todo._id}`
+              `${process.env.API_URI}/delete/${props.todo._id}`
             )
             .then(() => window.location.reload())
             .catch((error) => console.error("Delete error:", error))
@@ -41,7 +41,7 @@ export default class TodosList extends Component {
 
   componentDidMount() {
     axios
-      .get("https://mern-todo-server-phi.vercel.app/")
+      .get(process.env.API_URI)
       .then((response) => {
         this.setState({ todos: response.data });
       })
@@ -50,7 +50,7 @@ export default class TodosList extends Component {
 
   componentDidUpdate() {
     axios
-      .get("https://mern-todo-server-phi.vercel.app/")
+      .get(process.env.API_URI)
       .then((response) => {
         this.setState({ todos: response.data });
       })

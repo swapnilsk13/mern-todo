@@ -30,7 +30,7 @@ class EditTodo extends Component {
 	componentDidMount() {
 		console.log(this.props);
 		axios
-      .get("https://mern-todo-server-phi.vercel.app/" + this.props.params.id)
+      .get(process.env.API_URI + this.props.params.id)
       .then((response) => {
         console.log("response", response);
 
@@ -80,11 +80,7 @@ class EditTodo extends Component {
 		};
 		console.log(obj);
 		axios
-      .put(
-        "https://mern-todo-server-phi.vercel.app/update/" +
-          this.props.params.id,
-        obj
-      )
+      .put(process.env.API_URI + this.props.params.id, obj)
       .then((res) => console.log(res.data));
 
 		this.props.navigate("/");
